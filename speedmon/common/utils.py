@@ -23,7 +23,7 @@ def convert_results(results: Dict):
         results['server']['location'])
 
 
-def build_speedtest_command_line(server: int = None) -> List:
+def build_speedtest_command_line(server: str = None) -> List:
     if os_name() == 'nt':
         command = os.path.join(os.getcwd(), 'bin', 'speedtest.exe')
     else:
@@ -41,6 +41,7 @@ def run_speedtest_with_default_server(storage_handlers: List[StorageHandlerBase]
         log.error('Problem running speed test: %s', e)
         return
     save_results(storage_handlers, results)
+    return
 
 
 def run_speedtest_with_servers(storage_handlers: List[StorageHandlerBase], servers: List[str]) -> NoReturn:
@@ -51,6 +52,7 @@ def run_speedtest_with_servers(storage_handlers: List[StorageHandlerBase], serve
             log.error('Problem running speed test: %s', e)
             return
         save_results(storage_handlers, results)
+    return
 
 
 def run_speed_test(server: str = None) -> SpeedTestResult:
