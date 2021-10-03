@@ -41,7 +41,7 @@ class InfluxV1StorageHandler(StorageHandlerBase):
             if isinstance(e, InvalidURL):
                 log.error('Invalid URL for Influx V1')
             elif isinstance(e, ConnectTimeout):
-                log.error('Unable to connect to InfluxDB at the provided address (%s)', self.config.influx_v1_address)
+                log.error('Unable to connect to InfluxDB at the provided address (%s)', self.storage_config.url)
             elif hasattr(e, 'code') and e.code == 401:
                 log.error('Unable to connect to InfluxDB with provided credentials')
             else:

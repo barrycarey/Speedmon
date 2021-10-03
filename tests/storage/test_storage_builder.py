@@ -1,15 +1,12 @@
 import os
 from configparser import ConfigParser
 from unittest import TestCase
-from unittest.mock import patch
 
 from pydantic import ValidationError
 
-from speedmon.config.config_manager import ConfigManager
 from speedmon.storage.graphite.graphite_config import GraphiteConfig
 from speedmon.storage.graphite.graphite_storage_handler import GraphiteStorageHandler
 from speedmon.storage.influxv1.influxv1_config import InfluxV1Config
-from speedmon.storage.influxv1.influxv1_storage_handler import InfluxV1StorageHandler
 from speedmon.storage.influxv2.influxv2_config import InfluxV2Config
 from speedmon.storage.influxv2.influxv2_storage_handler import InfluxV2StorageHandler
 from speedmon.storage.storage_builder import storage_handler_conf_from_env, \
@@ -20,7 +17,6 @@ from speedmon.storage.storage_handler_base import StorageHandlerBase
 
 
 class TestStorageBuilder(TestCase):
-
 
     def test_storage_handler_conf_from_env_influxv1(self):
         os.environ['INFLUXv1_NAME'] = 'influxv1 test'
@@ -69,7 +65,6 @@ class TestStorageBuilder(TestCase):
         self.assertEqual(r.port, 2003)
         self.assertEqual(r.name, 'graphite test')
         self.assertEqual(r.url, 'localhost')
-
 
     def test_storage_handler_conf_from_env_influxv1_missing_required(self):
         if 'INFLUXv1_URL' in os.environ:

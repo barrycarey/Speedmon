@@ -3,6 +3,7 @@ import logging
 
 class SingleLevelFilter(logging.Filter):
     def __init__(self, passlevel, above=True):
+        super().__init__()
         self.passlevel = passlevel
         self.above = above
 

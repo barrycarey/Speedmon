@@ -1,5 +1,4 @@
 import json
-from configparser import ConfigParser
 from unittest import TestCase
 from unittest.mock import patch, Mock
 

@@ -18,11 +18,10 @@ def configure_logger(name: str = None, fmt: str = None, filters=None) -> logging
     general_handler.setFormatter(formatter)
     general_handler.setLevel(os.getenv('LOG_LEVEL', 'DEBUG'))
     error_handler = logging.StreamHandler(sys.stderr)
-    error_filter = SingleLevelFilter(logging.WARNING)
     error_handler.setFormatter(formatter)
     for fltr in filters:
         general_handler.addFilter(fltr)
-        error_handler.addFilter((fltr))
+        error_handler.addFilter(fltr)
     general_handler.addFilter(SingleLevelFilter(logging.INFO, False))
     error_handler.addFilter(SingleLevelFilter(logging.WARNING))
     log.addHandler(general_handler)

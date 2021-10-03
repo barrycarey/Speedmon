@@ -26,7 +26,6 @@ class ConfigManager:
 
         log.info('Configuration Successfully Loaded')
 
-
     @property
     def delay(self) -> int:
         if os.getenv('DELAY', None):

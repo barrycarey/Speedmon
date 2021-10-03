@@ -56,6 +56,7 @@ def init_storage_handlers_from_ini(ini: ConfigParser) -> List[StorageHandlerBase
 def init_storage_handler_from_ini(handler_name: str, ini: ConfigParser) -> Optional[StorageHandlerBase]:
     """
     Take a handler name and construct the handler from ENV variables
+    :param ini: ini file to use
     :param handler_name: Name of handler to build
     :return: StorageHandlerBase
     :rtype: Optional[StorageHandlerBase]
@@ -69,8 +70,9 @@ def init_storage_handler_from_ini(handler_name: str, ini: ConfigParser) -> Optio
     except ValidationError:
         log.error('Unable to build valid config from ENV for handler %s', handler_name)
         return
-    except ValueError as e:
-        log.error('%s is not a valid storage handler name. Valid options are %s', handler_name, ", ".join(list(STORAGE_CONFIG_MAP.keys())))
+    except ValueError:
+        log.error('%s is not a valid storage handler name. Valid options are %s', handler_name,
+                  ", ".join(list(STORAGE_CONFIG_MAP.keys())))
         return
 
     return STORAGE_CONFIG_MAP[handler_name]['handler'](storage_config)
@@ -86,7 +88,8 @@ def storage_handler_config_from_ini(handler_name: str, ini: ConfigParser) -> Sto
     """
     if handler_name not in STORAGE_CONFIG_MAP.keys():
         raise ValueError(
-            f'{handler_name} is not a valid storage handler name.  Valid options are {", ".join(list(STORAGE_CONFIG_MAP.keys()))}')
+            f'{handler_name} is not a valid storage handler name.  Valid options are {", ".join(list(STORAGE_CONFIG_MAP.keys()))}'
+        )
 
     if handler_name.upper() not in ini.sections():
         raise ValueError(f'No {handler_name.upper()} section in config')
@@ -122,7 +125,7 @@ def init_storage_handler_from_env(handler_name: str) -> Optional[StorageHandlerB
     except ValidationError:
         log.error('Unable to build valid config from ENV for handler %s', handler_name)
         return
-    except ValueError as e:
+    except ValueError:
         log.error('%s is not a valid storage handler name. Valid options are %s', handler_name,
                   ", ".join(list(STORAGE_CONFIG_MAP.keys())))
         return

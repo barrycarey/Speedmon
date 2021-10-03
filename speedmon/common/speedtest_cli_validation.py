@@ -51,7 +51,8 @@ def check_for_speedtest_cli_linux() -> bool:
 def attempt_to_install_speedtest_cli():
     if os_name() != 'nt':
         log.error(
-            'Automatic install is not supported on your OS. Please follow installation instructions here https://www.speedtest.net/apps/cli')
+            "Automatic install is not supported on your OS. Please follow installation instructions here "
+            "https://www.speedtest.net/apps/cli")
         raise UnsupportedOperatingSystem(f'Unsupported OS {os_name()}')
     download_speedtest_cli_windows()
 

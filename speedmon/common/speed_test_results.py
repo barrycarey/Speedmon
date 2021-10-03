@@ -15,10 +15,5 @@ class SpeedTestResult:
     packetloss: int = None
 
     def to_dict(self):
-        return {
-            'jitter': self.jitter,
-            'latency': self.latency,
-            'download': self.download,
-            'upload': self.upload,
-            'server_id': self.server_id,
-        }
+        return dict(jitter=self.jitter, latency=self.latency, download=self.download, upload=self.upload,
+                    server_id=self.server_id)

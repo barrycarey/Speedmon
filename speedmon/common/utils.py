@@ -2,7 +2,6 @@ import json
 import logging
 import os
 import subprocess
-from configparser import ConfigParser
 from typing import Dict, List, NoReturn
 
 from speedmon.common.exceptions import SpeedtestRunError
@@ -34,6 +33,7 @@ def build_speedtest_command_line(server: int = None) -> List:
         proc_args += ['-s', server]
     return proc_args
 
+
 def run_speedtest_with_default_server(storage_handlers: List[StorageHandlerBase]) -> NoReturn:
     try:
         results = run_speed_test()
@@ -42,15 +42,18 @@ def run_speedtest_with_default_server(storage_handlers: List[StorageHandlerBase]
         return
     save_results(storage_handlers, results)
 
-def run_speedtest_with_servers(storage_handlers: List[StorageHandlerBase], servers: List[str]) -> NoReturn:
-    try:
-        results = run_speed_test()
-    except SpeedtestRunError as e:
-        log.error('Problem running speed test: %s', e)
-        return
-    save_results(storage_handlers, results)
 
-def run_speed_test(server: int = None) -> SpeedTestResult:
+def run_speedtest_with_servers(storage_handlers: List[StorageHandlerBase], servers: List[str]) -> NoReturn:
+    for server in servers:
+        try:
+            results = run_speed_test(server=server)
+        except SpeedtestRunError as e:
+            log.error('Problem running speed test: %s', e)
+            return
+        save_results(storage_handlers, results)
+
+
+def run_speed_test(server: str = None) -> SpeedTestResult:
     """
     Performs the speed test with the provided server
     :param server: Server to test against
@@ -86,6 +89,7 @@ def save_results(storage_handlers: List[StorageHandlerBase], result: SpeedTestRe
         if handler.active:
             handler.save_results(result)
 
+
 def format_influxdb_results(data: SpeedTestResult) -> List[Dict]:
     return [
         {
@@ -105,4 +109,3 @@ def format_influxdb_results(data: SpeedTestResult) -> List[Dict]:
             }
         }
     ]
-

@@ -1,12 +1,11 @@
 import os
 import sys
 import time
-from configparser import ConfigParser
 
-from speedmon.common.exceptions import SpeedtestRunError, SpeedtestInstallFailure
+from speedmon.common.exceptions import SpeedtestInstallFailure
 from speedmon.common.logging.log import configure_logger
 from speedmon.common.speedtest_cli_validation import check_for_speedtest_cli, attempt_to_install_speedtest_cli
-from speedmon.common.utils import run_speed_test, save_results, run_speedtest_with_servers, \
+from speedmon.common.utils import run_speedtest_with_servers, \
     run_speedtest_with_default_server
 from speedmon.config.config_manager import ConfigManager
 from speedmon.storage.storage_builder import init_storage_handlers, \
