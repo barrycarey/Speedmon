@@ -1,0 +1,8 @@
+version: '2'
+services:
+  speedtest:
+    image: barrycarey/speedmon:latest
+    container_name: speedtest
+    volumes:
+      - ./config.ini:/src/config.ini
+    restart: always
