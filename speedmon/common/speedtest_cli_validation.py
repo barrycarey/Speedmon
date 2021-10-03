@@ -42,7 +42,7 @@ def check_for_speedtest_cli_linux() -> bool:
     Use the which command to see if the package is available
     :rtype: bool
     """
-    res = subprocess.run(['which', 'speedtest'], capture_output=True, encoding='UTF-8')
+    res = subprocess.run(['which', 'speedtest'], stdout=subprocess.PIPE, encoding='UTF-8')
     if not res.stdout:
         return False
     return True

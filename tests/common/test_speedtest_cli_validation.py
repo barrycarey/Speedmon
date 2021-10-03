@@ -8,7 +8,7 @@ from speedmon.common.speedtest_cli_validation import check_for_speedtest_cli_win
     check_for_speedtest_cli_linux, attempt_to_install_speedtest_cli
 
 
-class Test(TestCase):
+class SpeedtestCliValidation(TestCase):
     def test_check_for_speedtest_cli_windows_binary_exists_return_true(self):
         os.mkdir(os.path.join(os.getcwd(), 'bin'))
         with open(os.path.join(os.getcwd(), 'bin', 'speedtest.exe'), 'w') as f:
