@@ -9,18 +9,18 @@ from speedmon.common.utils import build_speedtest_command_line, run_speed_test
 
 class Test(TestCase):
 
-    @patch('speedmon.common.utils.os.getcwd')
+    @patch('speedmon.common.utils.os.path.join')
     @patch('speedmon.common.utils.os_name')
-    def test_build_speedtest_command_line_windows(self, mock_os_name, mock_getcwd):
-        mock_getcwd.return_value = r'C:\speedtest'
+    def test_build_speedtest_command_line_windows(self, mock_os_name, mock_join):
+        mock_join.return_value = r'C:\speedtest\bin\speedtest.exe'
         mock_os_name.return_value = 'nt'
         expected = [r'C:\speedtest\bin\speedtest.exe', '-f', 'json']
         self.assertListEqual(expected, build_speedtest_command_line())
 
-    @patch('speedmon.common.utils.os.getcwd')
+    @patch('speedmon.common.utils.os.path.join')
     @patch('speedmon.common.utils.os_name')
-    def test_build_speedtest_command_line_windows_with_server(self, mock_os_name, mock_getcwd):
-        mock_getcwd.return_value = r'C:\speedtest'
+    def test_build_speedtest_command_line_windows_with_server(self, mock_os_name, mock_join):
+        mock_join.return_value = r'C:\speedtest\bin\speedtest.exe'
         mock_os_name.return_value = 'nt'
         expected = [r'C:\speedtest\bin\speedtest.exe', '-f', 'json', '-s', '1111']
         self.assertListEqual(expected, build_speedtest_command_line(server='1111'))

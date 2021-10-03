@@ -19,19 +19,19 @@ from speedmon.storage.storage_handler_base import StorageHandlerBase
 class TestStorageBuilder(TestCase):
 
     def test_storage_handler_conf_from_env_influxv1(self):
-        os.environ['INFLUXv1_NAME'] = 'influxv1 test'
-        os.environ['INFLUXv1_URL'] = 'localhost'
-        os.environ['INFLUXv1_PORT'] = '9999'
-        os.environ['INFLUXv1_DATABASE_NAME'] = 'test_database'
-        os.environ['INFLUXv1_USER'] = 'test_user'
-        os.environ['INFLUXv1_PASSWORD'] = 'test_password'
+        os.environ['INFLUXV1_NAME'] = 'influxv1 test'
+        os.environ['INFLUXV1_URL'] = 'localhost'
+        os.environ['INFLUXV1_PORT'] = '9999'
+        os.environ['INFLUXV1_DATABASE_NAME'] = 'test_database'
+        os.environ['INFLUXV1_USER'] = 'test_user'
+        os.environ['INFLUXV1_PASSWORD'] = 'test_password'
         r = storage_handler_conf_from_env('influxv1')
-        del os.environ['INFLUXv1_NAME']
-        del os.environ['INFLUXv1_URL']
-        del os.environ['INFLUXv1_PORT']
-        del os.environ['INFLUXv1_DATABASE_NAME']
-        del os.environ['INFLUXv1_USER']
-        del os.environ['INFLUXv1_PASSWORD']
+        del os.environ['INFLUXV1_NAME']
+        del os.environ['INFLUXV1_URL']
+        del os.environ['INFLUXV1_PORT']
+        del os.environ['INFLUXV1_DATABASE_NAME']
+        del os.environ['INFLUXV1_USER']
+        del os.environ['INFLUXV1_PASSWORD']
         self.assertIsInstance(r, InfluxV1Config)
         self.assertEqual(r.user, 'test_user')
         self.assertEqual(r.password, 'test_password')
@@ -40,12 +40,17 @@ class TestStorageBuilder(TestCase):
         self.assertEqual(r.database_name, 'test_database')
 
     def test_storage_handler_conf_from_env_influxv2(self):
-        os.environ['INFLUXv2_NAME'] = 'influxv2 test'
-        os.environ['INFLUXv2_URL'] = 'localhost'
-        os.environ['INFLUXv2_TOKEN'] = 'abc123'
-        os.environ['INFLUXv2_ORG'] = 'test_org'
-        os.environ['INFLUXv2_BUCKET'] = 'test_bucket'
+        os.environ['INFLUXV2_NAME'] = 'influxv2 test'
+        os.environ['INFLUXV2_URL'] = 'localhost'
+        os.environ['INFLUXV2_TOKEN'] = 'abc123'
+        os.environ['INFLUXV2_ORG'] = 'test_org'
+        os.environ['INFLUXV2_BUCKET'] = 'test_bucket'
         r = storage_handler_conf_from_env('influxv2')
+        del os.environ['INFLUXV2_NAME']
+        del os.environ['INFLUXV2_URL']
+        del os.environ['INFLUXV2_TOKEN']
+        del os.environ['INFLUXV2_ORG']
+        del os.environ['INFLUXV2_BUCKET']
         self.assertIsInstance(r, InfluxV2Config)
         self.assertEqual(r.token, 'abc123')
         self.assertEqual(r.org, 'test_org')
