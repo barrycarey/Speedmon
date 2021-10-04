@@ -22,7 +22,7 @@ def check_for_speedtest_cli() -> bool:
     if os_name() == 'nt':
         return check_for_speedtest_cli_windows()
     elif os_name() == 'posix':
-        check_for_speedtest_cli_linux()
+        return check_for_speedtest_cli_linux()
     else:
         raise UnsupportedOperatingSystem(f'Unsupported OS {os_name()}')
 
