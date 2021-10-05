@@ -85,6 +85,7 @@ Storage backends are dynamically loaded based on what is in the config file. You
 Name = Whatever You want
 Url = http://localhost
 Port = 8086
+Database_name = speedtests
 User = 
 Password =
 SSL = False
