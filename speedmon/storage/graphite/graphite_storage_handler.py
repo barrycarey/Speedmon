@@ -18,7 +18,7 @@ class GraphiteStorageHandler(StorageHandlerBase):
 
     def _get_storage_client(self):
         return GraphyteSender(self.storage_config.url, prefix=self.storage_config.prefix, port=self.storage_config.port,
-                              log_sends=True)
+                              log_sends=False)
 
     def validate_connection(self) -> None:
         try:

@@ -34,6 +34,12 @@ Speedmon can be configured from a configuration file or environment variables.  
 
 You only need to include the variables for the storage backends you wish to use. 
 
+### General
+```
+DELAY
+SERVERS (1234,5431,ect)
+```
+
 #### Influx v1
 
 ```
@@ -57,7 +63,7 @@ INFLUXV2_URL
 INFLUXV2_TOKEN
 INFLUXV2_ORG
 INFLUXV2_BUCKET
-
+--Optional--
 INFLUXV2_NAME
 INFLUXV2_VERIFY_SSL
 ```
@@ -79,6 +85,12 @@ When initializing Speedmon looks for the SPEEDTEST_CONFIG ENV Variable to know w
 is not provided, Speedmon will attempt to load settings from ENV.
 
 Storage backends are dynamically loaded based on what is in the config file. You can safely delete the sections for backends not in use.  
+
+```buildoutcfg
+[GENERAL]
+Delay = 360
+Servers = 
+```
 
 ```buildoutcfg
 [INFLUXV1]

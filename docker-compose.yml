@@ -3,6 +3,8 @@ services:
   speedtest:
     image: barrycarey/speedmon:latest
     container_name: speedtest
+    environment:
+      - RUN_ENV=docker
     volumes:
       - ./config.ini:/src/config.ini
     restart: always

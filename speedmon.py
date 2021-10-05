@@ -6,7 +6,7 @@ from speedmon.common.exceptions import SpeedtestInstallFailure
 from speedmon.common.logging.log import configure_logger
 from speedmon.common.speedtest_cli_validation import check_for_speedtest_cli, attempt_to_install_speedtest_cli
 from speedmon.common.utils import run_speedtest_with_servers, \
-    run_speedtest_with_default_server
+    run_speedtest_with_default_server, accept_speedtest_license
 from speedmon.config.config_manager import ConfigManager
 from speedmon.storage.storage_builder import init_storage_handlers, \
     filter_dead_storage_handlers
@@ -29,6 +29,8 @@ if __name__ == '__main__':
             attempt_to_install_speedtest_cli()
         except SpeedtestInstallFailure:
             sys.exit(1)
+
+    accept_speedtest_license()
 
     storage_handlers = init_storage_handlers(ini=config.loaded_config)
     storage_handlers = list(filter(filter_dead_storage_handlers, storage_handlers))

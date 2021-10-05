@@ -23,6 +23,14 @@ def convert_results(results: Dict):
         results['server']['location'])
 
 
+def accept_speedtest_license() -> NoReturn:
+    if os_name() == 'nt':
+        executable = os.path.join(os.getcwd(), 'bin', 'speedtest.exe')
+    else:
+        executable = 'speedtest'
+    subprocess.run([executable, '--accept-license'],  stdout=subprocess.PIPE, encoding='UTF-8')
+
+
 def build_speedtest_command_line(server: str = None) -> List:
     if os_name() == 'nt':
         command = os.path.join(os.getcwd(), 'bin', 'speedtest.exe')
