@@ -63,7 +63,7 @@ def run_speed_test(server: str = None) -> SpeedTestResult:
 
     proc_args = build_speedtest_command_line(server)
     log.debug('Running with args: %s', ' '.join(proc_args))
-    process_result = subprocess.run(proc_args, capture_output=True, encoding='UTF-8')
+    process_result = subprocess.run(proc_args, stdout=subprocess.PIPE, encoding='UTF-8')
     if process_result.stderr:
         error_data = json.loads(process_result.stderr)
         log.error('Failed to run speedtest: %s', error_data['message'])
