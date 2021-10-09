@@ -143,7 +143,7 @@ barrycarey/speedmon:latest
 
 #### Using Optional Configuration File 
 
-If you do not want to configure Speedmon with ENV variables you can us configuration file
+If you do not want to configure Speedmon with ENV variables you can use a configuration file.
 
 1. Make a directory to hold the config.ini file. Navigate to that directory and download the sample config.ini in this repo.
 ```bash
@@ -156,7 +156,7 @@ cd speedmon
 nano config.ini
 ```
 
-Remove the unneeded storage backend sections.  Modify the remaining settings to fit our requirements
+Remove the unneeded storage backend sections.  Modify the remaining settings to fit our requirements.
 
 ```buildoutcfg
 [GENERAL]
@@ -167,7 +167,7 @@ Servers =
 
 [INFLUXV2]
 Name = Influx v2
-URL = = http://localhost:8086
+URL = http://localhost:8086
 Token = abc12345676
 Org = my-org
 Bucket = speedtests
@@ -187,7 +187,7 @@ docker run -d \
 barrycarey/speedmon:latest
 ```
 
-Before the first use run pip3 install -r requirements.txt
+Before the first use, run, `pip3 install -r requirements.txt`
 
 Enter your desired information in config.ini 
 
@@ -199,6 +199,6 @@ If you wish to contribute support for additional backends the process is straigh
 
 Add a new Package under ```speedmon.storage```.  Create a new Storage Handler that inherits from ```StorageHandlerBase```.  Create a new config that inherits from ```StorageConfig```.  Add the new storage backed to ```speedmon.storage.storage_config_map```
 
-Add the example config options to config.ini and name the section ```[HANDLERNAME]```. This must match the name you specified in the map
+Add the example config options to config.ini and name the section ```[HANDLERNAME]```. This must match the name you specified in the map.
 
-The handler will automatically be loaded and initialized if the config options are available in the config.ini or ENV vars
+The handler will automatically be loaded and initialized if the config options are available in the config.ini or ENV vars.
