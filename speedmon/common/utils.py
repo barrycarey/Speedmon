@@ -30,6 +30,12 @@ def accept_speedtest_license() -> NoReturn:
         executable = 'speedtest'
     subprocess.run([executable, '--accept-license'],  stdout=subprocess.PIPE, encoding='UTF-8')
 
+def accept_speedtest_gdpr() -> NoReturn:
+    if os_name() == 'nt':
+        executable = os.path.join(os.getcwd(), 'bin', 'speedtest.exe')
+    else:
+        executable = 'speedtest'
+    subprocess.run([executable, '--accept-gdpr'],  stdout=subprocess.PIPE, encoding='UTF-8')
 
 def build_speedtest_command_line(server: str = None) -> List:
     if os_name() == 'nt':
