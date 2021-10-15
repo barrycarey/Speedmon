@@ -66,8 +66,36 @@ class Test(TestCase):
                 'name': 'test server',
                 'country': 'USA',
                 'location': 'Maine'
-            }
+            },
+            'packetloss': 0.254
         }
         mock_subprocess.return_value = Mock(stdout=json.dumps(results), stderr=None)
         r = run_speed_test()
         self.assertIsInstance(r, SpeedTestResult)
+
+    @patch('speedmon.common.utils.subprocess.run')
+    def test_run_speed_test_with_validate_types(self, mock_subprocess):
+        results = {
+            'ping': {
+                'latency': 100
+            },
+            'download': {
+                'bandwidth': 1000.0
+            },
+            'upload': {
+                'bandwidth': 2000.0
+            },
+            'server': {
+                'id': 1234,
+                'name': 'test server',
+                'country': 'USA',
+                'location': 'Maine'
+            },
+            'packetloss': 0.254
+        }
+        mock_subprocess.return_value = Mock(stdout=json.dumps(results), stderr=None)
+        r = run_speed_test()
+        self.assertIsInstance(r.download, float)
+        self.assertIsInstance(r.upload, float)
+        self.assertIsInstance(r.packetloss, float)
+        self.assertIsInstance(r.server_id, int)

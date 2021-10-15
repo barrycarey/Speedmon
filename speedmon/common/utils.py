@@ -11,31 +11,14 @@ from speedmon.storage.storage_handler_base import StorageHandlerBase
 log = logging.getLogger(__name__)
 
 
-def convert_results(results: Dict):
-    return SpeedTestResult(
-        results['ping']['jitter'] if 'jitter' in results['ping'] else None,
-        results['ping']['latency'],
-        results['download']['bandwidth'],
-        results['upload']['bandwidth'],
-        results['server']['id'],
-        results['server']['name'],
-        results['server']['country'],
-        results['server']['location'])
-
-
-def accept_speedtest_license() -> NoReturn:
+def run_one_off_args(arg: str) -> NoReturn:
+    log.debug('Running 1 off arg %s', arg)
     if os_name() == 'nt':
         executable = os.path.join(os.getcwd(), 'bin', 'speedtest.exe')
     else:
         executable = 'speedtest'
-    subprocess.run([executable, '--accept-license'],  stdout=subprocess.PIPE, encoding='UTF-8')
+    subprocess.run([executable, arg], stdout=subprocess.PIPE, encoding='UTF-8')
 
-def accept_speedtest_gdpr() -> NoReturn:
-    if os_name() == 'nt':
-        executable = os.path.join(os.getcwd(), 'bin', 'speedtest.exe')
-    else:
-        executable = 'speedtest'
-    subprocess.run([executable, '--accept-gdpr'],  stdout=subprocess.PIPE, encoding='UTF-8')
 
 def build_speedtest_command_line(server: str = None) -> List:
     if os_name() == 'nt':
@@ -89,7 +72,7 @@ def run_speed_test(server: str = None) -> SpeedTestResult:
         log.error('Problem running test: %s', results['error'])
         raise SpeedtestRunError(f'Failed to run speed test.  Message: {results["error"]}')
 
-    return convert_results(results)
+    return SpeedTestResult(**results)
 
 
 def os_name() -> str:

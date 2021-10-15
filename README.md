@@ -4,7 +4,7 @@
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/barrycarey/speedmon)
 ![Master](https://github.com/barrycarey/Speedmon/workflows/Tests/badge.svg)
 ![Travis (.com)](https://img.shields.io/travis/com/barrycarey/Speedmon)
-![semver](https://img.shields.io/badge/semver-1.0.0-blue)
+![semver](https://img.shields.io/badge/semver-1.0.1-blue)
 ![CodeFactor Grade](https://img.shields.io/codefactor/grade/github/barrycarey/Speedmon/master)
 ------------------------------
 ![Screenshot](https://puu.sh/tmfOA/b5576e88de.png)

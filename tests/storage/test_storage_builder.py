@@ -38,6 +38,7 @@ class TestStorageBuilder(TestCase):
         self.assertEqual(r.name, 'influxv1 test')
         self.assertEqual(r.url, 'localhost')
         self.assertEqual(r.database_name, 'test_database')
+        self.assertEqual(r.database_name, 'test_database')
 
     def test_storage_handler_conf_from_env_influxv2(self):
         os.environ['INFLUXV2_NAME'] = 'influxv2 test'
