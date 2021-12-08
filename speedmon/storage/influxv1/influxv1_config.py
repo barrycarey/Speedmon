@@ -10,3 +10,4 @@ class InfluxV1Config(StorageConfig):
     password = ''
     verify_ssl = False
     ssl = False
+    skip_test = False

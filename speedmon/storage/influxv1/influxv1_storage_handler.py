@@ -32,6 +32,10 @@ class InfluxV1StorageHandler(StorageHandlerBase):
         )
 
     def validate_connection(self):
+        if self.storage_config.skip_test:
+            self.active = True
+            return
+
         try:
             log.debug('Testing connection to InfluxDb using provided credentials')
             self.client.get_list_users()  # TODO - Find better way to test connection and permissions
@@ -45,11 +49,8 @@ class InfluxV1StorageHandler(StorageHandlerBase):
             elif hasattr(e, 'code') and e.code == 401:
                 log.error('Unable to connect to InfluxDB with provided credentials')
             else:
-                log.error('Failed to connect to InfluxDB for unknown reason')
+                log.error('Failed to connect to InfluxDB for unknown reason: %s', str(e))
             self.active = False
-            return
-
-        self.active = True
 
     def save_results(self, data: SpeedTestResult):
 
